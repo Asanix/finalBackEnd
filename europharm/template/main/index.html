@@ -7,7 +7,7 @@
 <section class="hero">
         <div class="container">
             <div class="row">
-                <div class="col-lg-2">
+                <div class="col-lg-3">
                     <div class="hero__categories">
                         <div class="hero__categories__all">
                             <i class="fa fa-bars"></i>
@@ -49,16 +49,11 @@
         <div class="container">
             <h4 class="mb-5">{{message}}</h4>
             <div class="row featured__filter">
-                        <ul>
-                            {% for cat in view.get_category %}
-                            <li><a href=""> {{cat.name}} </a></li>
-                            {% endfor %}
-                        </ul>
-
 
                 {% for product in products %}
                 {% if product.is_active %}
-                    <div class="col-lg-3">
+
+                    <div class="col-lg-3 col-md-4 col-sm-6">
                         <div class="featured__item">
                             <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-1.jpg">
                                 <img src="{{ product.image.url }}">
@@ -73,9 +68,11 @@
                             </div>
                         </div>
                     </div>
+
                 {% endif %}
 
                 {% endfor %}
+
 
             </div>
         </div>
