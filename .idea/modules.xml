@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Mider.iml" filepath="$PROJECT_DIR$/.idea/Mider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/finalBackEnd.iml" filepath="$PROJECT_DIR$/.idea/finalBackEnd.iml" />
     </modules>
   </component>
 </project>

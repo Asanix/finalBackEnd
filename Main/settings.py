@@ -44,7 +44,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, 'C:/Users/Administrator/PycharmProjects/Mider/europharm/template')
+            os.path.join(BASE_DIR, 'europharm/template')
         ],
         'APP_DIRS': True,
         'OPTIONS': {
