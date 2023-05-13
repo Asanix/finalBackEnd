@@ -1,0 +1,25 @@
+{% extends 'main/mein.html' %}
+{% block title %}
+Купить лекарства. Доставка (24/7). Интернет-аптека Еврофарма
+{% endblock %}
+{% block content %}
+
+
+{% if request.user.is_authenticated %}
+<ul class="menu">
+    <li>
+        <a href="{% url 'login:dashboard' %}">My account</a>
+        <a href="{% url 'login:logout' %}">Logout</a>
+    </li>
+</ul>
+{% else %}
+<div class="main-nav">
+    <ul>
+        <li><a class="signin" href="{% url 'login:login' %}">Sign in</a></li>
+        <li><a class="signup" href="{% url 'reg' %}">Sign up</a></li>
+    </ul>
+</div>
+{% endif %}
+
+
+{% endblock %}

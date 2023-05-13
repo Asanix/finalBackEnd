@@ -1,0 +1,32 @@
+{% extends 'main/mein.html' %}
+{% block title %}
+Редактировать продукт
+{% endblock %}
+{% block content %}
+
+
+<section class="container">
+    <div class="row justify-content-around text-center mt-3">
+        <div class="col-sm-8">
+            <h3>Edit product</h3>
+        </div>
+    </div>
+    <div class="row justify-content-around mb-3 mt-3">
+        <div class="col-sm-8">
+            <button onclick="history.back()" class="btn btn-primary">Go Back</button>
+        </div>
+    </div>
+    <div class="row justify-content-around mb-5">
+        <div class="col-sm-8">
+            <form action="" enctype='multipart/form-data' method="POST" class="bg-white p-3 rounded shadow">
+                {% csrf_token %}
+                {{form.as_p}}
+                <input type="submit" value="Submit" class="btn btn-primary">
+            </form>
+        </div>
+    </div>
+
+</section>
+
+
+{% endblock %}

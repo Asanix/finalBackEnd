@@ -1,0 +1,36 @@
+{% extends 'main/mein.html' %}
+{% block title %}
+Войти
+{% endblock %}
+{% block content %}
+
+
+    <div class="main-nav">
+        <ul>
+            <li><a class="signin" href="{% url 'login:login' %}">Sign in</a></li>
+            <li><a class="signup" href="{% url 'reg' %}">Sign up</a></li>
+        </ul>
+    </div>
+
+
+
+    <div class="login-form row justify-content-center" style="margin-top: -40px">
+
+        <form action="{% url 'login:login' %}" method="post" class="mx-1 mx-md-4">
+            {% csrf_token %}
+            <p style="color: grey;">
+            {% if form.errors %}
+            {% else %}
+                Please log in
+            {% endif %}
+                </p>
+            {{ form.as_p }}
+            <input type="hidden" name="next" value="{{ next }}" />
+            <p><input type="submit" class="btn btn-primary" value="Log-in"></p>
+        </form>
+    </div>
+
+
+
+
+{% endblock %}

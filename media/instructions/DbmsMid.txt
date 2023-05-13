@@ -1,0 +1,54 @@
+I am Rakhimov Assanali 210103203
+
+My ERD has 7 entities with their attributes, 7 entities means 7 tables. 
+And each table has its own primary key. Such as in Users it is User ID, 
+in Seller it is Seller ID and so on.
+Users are divided into 2, they are Seller and Buyer. Seller sells and Buyer 
+buys. Also Seller must sell product and sells at least 1 product. And Buyer 
+has a shopping cart where his products which he can buy in future. Bayer makes 
+an order and the order must have a product. Also, one order can have only one 
+buyer. There is also a bank card where information about the buyer's card is stored.
+
+
+Primary key - values that are unique for the entire table and values must not be duplicated.
+
+Why do my tables follow all 3 normal forms.
+First normal form. In 1NF the table must not contain duplicate rows, no arrays or lists of any kind and column contains data of the same type.
+Second normal form. In 2NF the table must be in first normal form, table must have a primary key and all non-key columns of the table depend on the primary key.
+Third normal form. In 3NF the table must be in second normal form and the requirement of the third normal form is that there is no transitive dependence in the tables.
+What is the transitive dependece?
+Transitive dependency is when non-key columns depend on the values of other non-key columns.
+That is, non-key columns must depend only on the primary key.
+All my tables follow normal forms.
+
+
+
+
+I wrote a procedure called "how much". It takes varchar tip and number total. In Begin begins 
+select number of users from users table, where user type is equal to tip and groups by type. 
+There are 2 types in the users table, they are seller and buyer. Here the procedure takes Buyer 
+and total number. And it shows how many buyers there are.
+
+
+The second thing I wrote was a numbers function. Which takes the name of column and return 
+total number. It selects the number of records in total, and returns total.
+
+I created a procedure insert_buyer that takes all the values of the table and makes an entry 
+in the table. And after we have entered the given into the table in res I save how many changes 
+occurred in our table with sql%rowcount.  We can call the procedure several times and resall 
+saves all the changes that occurred.
+
+I created a trigger called short_name. When we add data to the products table, and the length 
+of our product name is less than 3 characters, an error comes out saying that the name must be 
+longer than 3 characters. Why not 5? Because my table has product names that are less than 5 
+characters long.
+
+And lastly a trigger that shows the number of rows that already exist before creating new ones.
+
+
+
+
+
+
+
+

@@ -1,0 +1,78 @@
+{% extends 'main/mein.html' %}
+{% block title %}
+Личный кабинет
+{% endblock %}
+{% block content %}
+
+
+    {% if request.user.is_authenticated %}
+
+        <section>
+          <div class="container py-5">
+            <div class="row justify-content-around">
+              <div class="col-lg-8">
+                <div class="card mb-4">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <p class="mb-0">Username:</p>
+                      </div>
+                      <div class="col-sm-9">
+                        <p class=" mb-0" style="color: black;">{{user.username}}</p>
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <p class="mb-0">First Name:</p>
+                      </div>
+                      <div class="col-sm-9">
+                        <p class="mb-0" style="color: black;">{{user.first_name}}</p>
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <p class="mb-0">Last Name:</p>
+                      </div>
+                      <div class="col-sm-9">
+                        <p class="mb-0" style="color: black;">{{user.last_name}}</p>
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <p class="mb-0">Email:</p>
+                      </div>
+                      <div class="col-sm-9">
+                        <p class="mb-0" style="color: black;">{{user.email}}</p>
+                      </div>
+                    </div>
+                      <hr>
+                    <a href="{% url 'edit_user' user.id %}" class="btn btn-sm btn-info">Edit profile</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </section>
+
+
+        <ul class="row justify-content-around text-center mb-5 w-25 " style="list-style: none; margin-left: auto; margin-right: auto;">
+            <li>
+                {% if user.is_superuser %}
+                <a href="{% url 'admin_page' %}" class="btn btn-primary mr-2">Admin page</a>
+                <a href="{% url 'login:logout' %}" class="btn btn-outline-danger ml-2">Logout</a>
+                {% else %}
+                <a href="{% url 'add_product_user' %}" class="btn btn-primary float-end">Add product</a>
+                <a href="{% url 'login:logout' %}" class="btn btn-outline-danger ml-2">Logout</a>
+                {% endif %}
+            </li>
+        </ul>
+    {% endif %}
+
+
+
+{% endblock %}
+

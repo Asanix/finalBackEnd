@@ -1,0 +1,122 @@
+{% extends 'main/mein.html' %}
+{% block title %}
+Админ панель
+{% endblock %}
+{% block content %}
+
+<div>
+    <section class="container">
+        <div class="row justify-content-around text-center mt-3">
+            <div class="col-sm-8">
+                <h3>Products</h3>
+            </div>
+        </div>
+        <div class="row justify-content-around">
+            <div class="col-sm-8">
+                <a href="{% url 'login:dashboard' %}" class="btn btn-primary float-end">Go back</a>
+                <a href="{% url 'add_product_admin' %}" class="btn btn-primary float-end">Add product</a>
+            </div>
+        </div>
+        <div class="row justify-content-around text-center mt-1">
+            <div class="col-sm-8">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Author</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for product in products %}
+                        <tr>
+                            <td scope="row">{{forloop.counter}}</td>
+                            <td>{{product.category}}</td>
+                            <td>{{product.title}}</td>
+                            <td>{{product.author}}</td>
+                            <td>{{product.price}} kz</td>
+                            <td>{% if product.is_active %}  <p style="color: #60F236;">Accepted</p> {% else %} <p style="color: #F00707;">Sending</p> {% endif %}</td>
+                            <td class="aline-inline">
+                                <form action="{% url 'delete_product' %}" method="POST">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="id" value="{{product.id}}">
+                                    <a href="{% url 'edit_product' product.id %}" class="btn btn-sm btn-info">Edit</a>
+                                    <button type="submit" value="Delete" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </section>
+
+
+    <section class="container">
+        <div class="row justify-content-around text-center mt-3">
+            <div class="col-sm-8">
+                <h3>Users</h3>
+            </div>
+        </div>
+        <div class="row justify-content-around">
+            <div class="col-sm-8">
+                <a href="{% url 'login:dashboard' %}" class="btn btn-primary float-end">Go back</a>
+                <a href="{% url 'add_user' %}" class="btn btn-primary float-end">Add user</a>
+            </div>
+        </div>
+        <div class="row justify-content-around text-center mt-1">
+            <div class="col-sm-8">
+                <table class="table table-hover mb-5">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Superuser</th>
+                            <th scope="col">Username</th>
+                            <th scope="col">First name</th>
+                            <th scope="col">Last name</th>
+                            <th scope="col">Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for user in users %}
+                        <tr>
+                            <td scope="row">{{forloop.counter}}</td>
+                            <td scope="row">{% if user.is_superuser %} <p style="color: #60F236;">Yes</p> {% else %} <p style="color: #F00707;">No</p> {% endif %}</td>
+                            <td>{{user.username}}</td>
+                            {% if user.first_name %}
+                            <td>{{user.first_name}}</td>
+                            {% else %}
+                            <td>-</td>
+                            {% endif %}
+                            {% if user.last_name %}
+                            <td>{{user.last_name}}</td>
+                            {% else %}
+                            <td>-</td>
+                            {% endif %}
+                            <td class="aline-inline">
+                                <form action="{% url 'delete_user' %}" method="POST">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="id" value="{{user.id}}">
+                                    <a href="{% url 'edit_user' user.id %}" class="btn btn-sm btn-info">Edit</a>
+                                    <button type="submit" value="Delete" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </section>
+</div>
+
+
+
+{% endblock %}

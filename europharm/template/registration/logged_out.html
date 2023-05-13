@@ -1,0 +1,24 @@
+{% extends 'main/mein.html' %}
+{% block title %}
+Войти
+{% endblock %}
+{% block content %}
+
+    {% if request.user.is_authenticated %}
+        <ul class="menu">
+            <li>
+                <a href="{% url 'login:login' %}">My dashboard</a>
+                <a href="{% url 'login:logout' %}">Logout</a>
+            </li>
+        </ul>
+    {% else %}
+        <div class="main-nav">
+            <ul>
+                <li><a class="signin" href="{% url 'login:login' %}">Sgn in</a></li>
+                <li><a class="signup" href="{% url 'reg' %}">Sign up</a></li>
+            </ul>
+        </div>
+    {% endif %}
+
+
+{% endblock %}
