@@ -49,5 +49,10 @@ class Profile(models.Model):
         return self.username
 
 
-
-
+class Order(models.Model):
+    address = models.CharField(max_length=255)
+    city = models.CharField(max_length=255)
+    index = models.DecimalField(max_digits=5, decimal_places=0)
+    product = models.ForeignKey(Product, related_name='product', on_delete=models.CASCADE)
+    price = models.ForeignKey(Product.price, related_name='product', on_delete=models.CASCADE)
+    buyer = models.ForeignKey(Product.price, related_name='product', on_delete=models.CASCADE)
