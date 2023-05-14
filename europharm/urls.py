@@ -24,6 +24,5 @@ urlpatterns = [
     path('edit_product/<int:id>/', edit_product.as_view(), name='edit_product'),
     path('edit_user/<int:id>/', edit_user.as_view(), name='edit_user'),
     path('search/', Search.as_view(), name='search'),
-    //asd
 ]
 
