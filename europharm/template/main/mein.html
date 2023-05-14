@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{% block title %}{% endblock %}</title>
-    <link rel="icon" type="image/png" href="{% static 'img/europharm_icon.png' %}">
+    <link rel="icon" type="image/png" href="{% static 'img/logo.png' %}">
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
@@ -34,26 +34,26 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-3">
-                    <div class="header__logo">
-                        <a href="{% url 'main' %}"><img src="{% static 'img/europharma_ru.png' %}" alt=""></a>
+                    <div class="header__logo" style="margin-top: -80px; margin-bottom: -60px;">
+                        <a href="{% url 'main' %}"><img src="{% static 'img/log.png' %}" alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-6 mt-2">
                     <nav class="header__menu">
                         <ul>
-                            <li><a href="{% url 'main' %}">Hoome</a></li>
-                            <li><a href="">Contact</a></li>
+                            <li><a href="{% url 'main' %}">Home</a></li>
+                            <li><a href="{% url 'about' %}">Contact</a></li>
                             <li><a href="">Shop</a></li>
                             <li><a href="#">Pages</a>
                             </li>
-                            <li><a href="">Blog</a></li>
+                            <li><a href="{% url 'about' %}">About Us</a></li>
                         </ul>
                     </nav>
                 </div>
                 <div class="col-lg-3 mt-2" style="margin-right: -100px;">
                     <div class="header__cart" style="margin-left: -10x;">
                         <ul>
-                            <li class="mr-2"><a href="{% url 'basket' %}"><i class="fa fa-shopping-bag"></i> <span>0</span></a></li>
+                            <li class="mr-2"><a href="{% url 'basket' %}"><i class="fa fa-shopping-bag"></i></a></li>
                         </ul>
                             <div class="header__top__right__auth">
                                 <a href="{% url 'login:dashboard' %}"><i class="fa fa-user"></i>
@@ -90,8 +90,8 @@
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer__about">
-                        <div class="footer__about__logo">
-                            <a href=""><img src="{% static 'img/logo-footer.png' %}" alt=""></a>
+                        <div class="footer__about__logo" style="margin-top: -80px; margin-bottom: -30px;">
+                            <a href=""><img src="{% static 'img/log.png' %}" alt=""></a>
                         </div>
                         <ul>
                             <li>Address: 60-49 Road 11378 New York</li>
@@ -104,7 +104,7 @@
                     <div class="footer__widget">
                         <h6>Useful Links</h6>
                         <ul>
-                            <li><a href="#">About Us</a></li>
+                            <li><a href="{% url 'about' %}">About Us</a></li>
                             <li><a href="#">About Our Shop</a></li>
                             <li><a href="#">Secure Shopping</a></li>
                             <li><a href="#">Delivery information</a></li>
@@ -112,7 +112,7 @@
                             <li><a href="#">Our Sitemap</a></li>
                         </ul>
                         <ul>
-                            <li><a href="#">Who We Are</a></li>
+                            <li><a href="{% url 'about' %}">Who We Are</a></li>
                             <li><a href="#">Our Services</a></li>
                             <li><a href="#">Projects</a></li>
                             <li><a href="#">Contact</a></li>
@@ -126,7 +126,7 @@
                         <h6>Join Our Newsletter Now</h6>
                         <p>Get E-mail updates about our latest shop and special offers.</p>
                         <form action="#">
-                            <input type="text" placeholder="Enter your mail">
+                            <input type="email" placeholder="Enter your mail">
                             <button type="submit" class="site-btn">Subscribe</button>
                         </form>
                         <div class="footer__widget__social">

@@ -4,6 +4,155 @@
 {% endblock %}
 {% block content %}
 
-<p>Basket</p>
+<style>
+    .form-control{
+        width: 250px;
+    }
+</style>
 
+
+<div class="container my-3 mt-5" style="margin-left: 420px;">
+    <form action="{% url 'placeorder' %}" method="POST">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-7" style="width: 100%">
+                <div class="card shadow">
+                    <div class="card-body" style="width: 100%">
+                        <h4 class="mt-3 mb-2" style="margin-left: 21px;">Basic Details</h4>
+                        <div class="row checkoutform" style="flex-wrap: wrap">
+                            <div class="col-md-6 mt-2" style="display: flex">
+                                <div style="margin: 0 1.5rem">
+                                    <label>First Name</label>
+                                    <input type="text" required class="form-control" name="fname"
+                                           placeholder="First name">
+                                </div>
+                                <div style="margin: 0 1.5rem">
+                                    <label>Last Name</label>
+                                    <input type="text" required class="form-control" name="lname"
+                                           placeholder="Last name">
+                                </div>
+                            </div>
+                            <div class="col-md-6 mt-2" style="display: flex">
+                                <div style="margin: 0 1.5rem">
+                                    <label>Email</label>
+                                    <input type="text" required class="form-control" name="email"
+                                           placeholder="Email address">
+                                </div>
+                                <div style="margin: 0 1.5rem">
+                                    <label>Phone Number</label>
+                                    <input type="text" required class="form-control" name="phone"
+                                           placeholder="Phone number">
+                                </div>
+                            </div>
+                            <div class="col-md-6 mt-2" style="display: flex">
+                                <div style="margin: 0 1.5rem">
+                                    <label>Address</label>
+                                    <input type="text" required class="form-control" name="address"
+                                           placeholder="Address">
+                                </div>
+                                <div style="margin: 0 1.5rem">
+                                    <label>City</label>
+                                    <input type="text" required class="form-control" name="city"
+                                           placeholder="City name">
+                                </div>
+                            </div>
+                            <div class="col-md-6 mt-2" style="display: flex">
+                                <div style="margin: 0 1.5rem">
+                                    <label>State</label>
+                                    <input type="text" required class="form-control" name="state"
+                                           placeholder="State name">
+                                </div>
+                                <div style="margin: 0 1.5rem">
+                                    <label>Country</label>
+                                    <input type="text" required class="form-control" name="country"
+                                           placeholder="Country name">
+                                </div>
+                            </div>
+                            <div class="col-md-6 mt-2" style="display: flex">
+                                <div style="margin: 0 1.5rem">
+                                    <label>ZIP</label>
+                                    <input type="text" required class="form-control" name="zip" placeholder="ZIP code">
+                                    <button type="submit" class="btn btn-success w-100" style="margin: 1.5rem 0"> PLACE
+                                        ORDER
+                                    </button>
+                                </div>
+                                
+                            </div>
+                            <input type="hidden" value="COD" name="payment">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% if items.all %}
+<div class="container my-3" style="margin-left: 420px;">
+    <div class="row">
+        <div class="col-md-7" style="width: 100%">
+            <div class="card shadow">
+                <div class="card-body" style="width: 100%">
+                    <h4 class="mt-3 mb-2" style="margin-left: 21px;">Basket</h4>
+                    <div class="row checkoutform" style="flex-wrap: wrap">
+                        <div class="ml-3">
+                            {% for item in items %}
+
+                            <div class="card rounded-3 mb-4">
+                                <div class="card-body p-4">
+                                    <div class="row d-flex justify-content-between align-items-center">
+                                        <div class="col-md-2 col-lg-2 col-xl-2 ml-3 mt-2"
+                                             style="width:310px; height: 160px; background-image: url('{{ item.product.image.url }}');background-size: contain;background-repeat: no-repeat;">
+
+                                        </div>
+                                        <div class="col-md-3 col-lg-3 col-xl-3">
+                                            <p class="lead fw-normal mb-2" style="font-size: 16px;">{{item.product.title}}</p>
+                                            <p class="lead fw-normal mb-2" style="font-size: 12px;">{{item.product.author}}</p>
+                                        </div>
+
+
+
+                                        <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                                            <h5 class="mb-0">{{item.product.price}} ₸</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% if order.all %}
+<div class="container my-3 mb-5" style="margin-left: 420px;">
+    <form action="{% url 'placeorder' %}" method="POST">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-7" style="width: 100%">
+                <div class="card shadow">
+                    <div class="card-body" style="width: 100%">
+                        <h4 class="mt-3 mb-2" style="margin-left: 21px;">Basket</h4>
+                        <div class="row checkoutform" style="flex-wrap: wrap">
+                            <div class="ml-3">
+                                {% for o in order %}
+                                <div class="ml-2" style="display: flex">
+                                    <h6 style="margin: 1rem">{{ o }}</h6>
+                                    <h6 style="margin: 1rem">{{ o.status }}</h6>
+                                    <h6 style="margin: 1rem">{{ o.totalPrice }} ₸</h6>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{% endif %}
 {% endblock %}

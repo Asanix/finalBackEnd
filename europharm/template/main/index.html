@@ -4,6 +4,48 @@
 {% endblock %}
 {% block content %}
 
+<style>
+
+* { margin:0; padding:0; }
+
+#content { margin: 50px; }
+a { text-decoration: none; }
+
+.expandable {
+  background: #fff;
+  overflow: hidden;
+  color: #000;
+  line-height: 50px;
+
+  transition: all .5s ease-in-out;
+  height: 0;
+ }
+
+ .expandable:target {
+  height: 50px;
+}
+
+
+    .square-holder {
+        padding: 30px;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+        min-height: 200px
+    }
+
+    .square-holder img {
+        max-width: 100%;
+        filter: grayscale(100%);
+        transition: all 0.3s;
+    }
+
+    .square-holder:hover img {
+        filter: none;
+    }
+</style>
+
 <section class="hero">
         <div class="container">
             <div class="row">
@@ -58,13 +100,13 @@
                             <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-1.jpg">
                                 <img src="{{ product.image.url }}">
                                 <ul class="featured__item__pic__hover">
-                                    <li><a href=""><i class="fa fa-shopping-cart"></i></a></li>
+                                    <li><a href="{% url 'add_to_cart' product.id %}"><i class="fa fa-shopping-cart"></i></a></li>
                                 </ul>
                             </div>
                             <div class="featured__item__text">
                                 <h6><a href="">{{product.title}}</a></h6>
                                 <a href="http://127.0.0.1:8000/product_detail/{{ product.slug }}">Details</a>
-                                <h5>{{product.price}} Kz</h5>
+                                <h5>{{product.price}} ₸</h5>
                             </div>
                         </div>
                     </div>
@@ -80,7 +122,74 @@
     <!-- Featured Section End -->
 
 
+<section class="mt-5">
+    <div class="text-center mb-3"><h2>What customers are saying</h2></div>
+    <div class="container d-flex justify-content-center">
+  <div class="col-sm-4">
+    <div class="card">
+      <div class="card-body">
+          <h5 class="card-title text-center"><img width="115" height="24" src="https://m.media-amazon.com/images/G/01/wg/lp/LEGO-LP/Storefont_v2/Home/five-stars-jade.svg" alt=""></h5>
+        <p class="card-text">“Fewer trips to the pharmacy and more reliable service than I was getting with my old pharmacy”</p>
+        <p>– Anita F, Amazon Pharmacy customer</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="card">
+      <div class="card-body">
+          <h5 class="card-title text-center"><img width="115" height="24" src="https://m.media-amazon.com/images/G/01/wg/lp/LEGO-LP/Storefont_v2/Home/five-stars-jade.svg" alt=""></h5>
+        <p class="card-text">“It is very easy to order my prescriptions and then receive them delivered to my home very quickly!”</p>
+            <p>– Kathleen F, Amazon Pharmacy customer
+</p>
+      </div>
+    </div>
+  </div>
+       <div class="col-sm-4">
+    <div class="card">
+      <div class="card-body">
+          <h5 class="card-title text-center"><img width="115" height="24" src="https://m.media-amazon.com/images/G/01/wg/lp/LEGO-LP/Storefont_v2/Home/five-stars-jade.svg" alt=""></h5>
+        <p class="card-text">“I don't have to follow up with my doctor's office for refills anymore.”</p>
+            <p>– Meredith M, Amazon Pharmacy customer</p>
+      </div>
+    </div>
+  </div>
+</div>
 
+</section>
+
+
+<div class="container mb-5 mt-5">
+
+    <section class="section section-default mt-none mb-none">
+        <div class="container">
+            <h2 class="mb-sm text-center mb-2">Our <strong>Partners</strong></h2>
+            <strong>
+                <div class="row">
+                    <div class="col-sm-6 col-md-4 col-lg-3" style="cursor: pointer;">
+                        <div class="square-holder">
+                            <img alt="" src="https://www.pmits.co.uk/portals/0/images/partners/talk-internet-200.png"/>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-lg-3" style="cursor: pointer;">
+                        <div class="square-holder">
+                            <img alt="" src="https://www.pmits.co.uk/Portals/0/img/opera3_logo.png"/>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-lg-3" style="cursor: pointer;">
+                        <div class="square-holder">
+                            <img alt="" src="https://www.pmits.co.uk/Portals/0/pegasus-logo.png"/>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-lg-3" style="cursor: pointer;">
+                        <div class="square-holder">
+                            <img alt="" src="https://www.pmits.co.uk/Portals/0/sage business partner.jpg"/>
+                        </div>
+                    </div>
+                </div>
+            </strong>
+        </div>
+    </section>
+</div>
 {% endblock %}
 
 

@@ -1,12 +1,15 @@
 from datetime import datetime
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import UserCreationForm
+from django.core.checks import messages
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
 from django.views.generic import ListView
 
 from .models import *
 from .forms import AddProductForm, AddUserForm, EditUserForm, AddProductFormUser
+
+import random
 
 
 class index(View):
@@ -60,7 +63,10 @@ class acc(View):
 
 class basket(View):
     def get(self, request):
-        return render(request, '../template/main/basket.html')
+        cart = Cart.objects.filter(user=request.user)
+        order = Order.objects.filter(user=request.user)
+        context = {'items': cart, 'order': order}
+        return render(request, '../template/main/basket.html', context)
 
 
 class detail(View):
@@ -203,4 +209,66 @@ class Search(ListView):
         context = super().get_context_data(*args, **kwargs)
         context['search'] = self.request.GET.get('search')
         return context
+
+
+class PlaceOrder(View):
+    def post(self, request):
+        neworder = Order()
+        neworder.user = request.user
+        neworder.fname = request.POST.get('fname')
+        neworder.lname = request.POST.get('lname')
+        neworder.email = request.POST.get('email')
+        neworder.phone = request.POST.get('phone')
+        neworder.address = request.POST.get('address')
+        neworder.city = request.POST.get('city')
+        neworder.state = request.POST.get('state')
+        neworder.country = request.POST.get('country')
+        neworder.zip = request.POST.get('zip')
+
+        neworder.payment = request.POST.get('payment')
+
+        cart = Cart.objects.filter(user=request.user)
+        cart_total_price = 0
+        for item in cart:
+            cart_total_price += item.product.price
+
+        neworder.totalPrice = cart_total_price
+
+        tracking_no = 'NO' + str(random.randint(111111111, 999999999))
+        while Order.objects.filter(tracking_no=tracking_no) is None:
+            tracking_no = 'NO' + str(random.randint(111111111, 999999999))
+
+        neworder.tracking_no = tracking_no
+        neworder.save()
+
+        neworderitems = Cart.objects.filter(user=request.user)
+        for item in neworderitems:
+            OrderItem.objects.create(
+                order=neworder,
+                product=item.product,
+                price=item.product.price
+            )
+
+        Cart.objects.filter(user=request.user).delete()
+
+        return redirect('/')
+
+
+def add_to_cart(request, id):
+    product = Product.objects.get(id=id)
+    user = request.user
+    cart = Cart.objects.create(user=user, product=product, is_paid=False)
+    cart.save()
+
+    context = {
+        'product': product
+    }
+
+    return redirect('/basket/', context)
+
+
+class about(View):
+    def get(self, request):
+        return render(request, '../template/main/about.html')
+
 

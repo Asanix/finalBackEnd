@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Category, Product, Profile
+from .models import *
 
 
 @admin.register(Category)
@@ -25,3 +25,16 @@ class Profile(admin.ModelAdmin):
     list_filter = ['username']
 
 
+@admin.register(Cart)
+class Cart(admin.ModelAdmin):
+    list_display = ['user', 'product']
+
+
+@admin.register(Order)
+class Order(admin.ModelAdmin):
+    list_display = ['user', 'tracking_no']
+
+
+@admin.register(OrderItem)
+class OrderItem(admin.ModelAdmin):
+    list_display = ['order', 'product', 'price']
