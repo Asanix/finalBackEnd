@@ -89,7 +89,7 @@ class register(View):
             form.save()
             user = authenticate(username=username, password=password1)
             login(request, user)
-            return redirect('log')
+            return redirect('main')
         return render(request, '../template/registration/register.html', {'form': form})
 
 
