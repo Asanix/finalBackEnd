@@ -66,7 +66,6 @@
         </div>
         <div class="row justify-content-around">
             <div class="col-sm-8">
-                <a href="{% url 'login:dashboard' %}" class="btn btn-primary float-end">Go back</a>
                 <a href="{% url 'add_user' %}" class="btn btn-primary float-end">Add user</a>
             </div>
         </div>
@@ -115,6 +114,56 @@
         </div>
 
     </section>
+
+
+    <section class="container">
+        <div class="row justify-content-around text-center mt-3">
+            <div class="col-sm-8 mb-3">
+                <h3>Orders</h3>
+            </div>
+        </div>
+        <div class="row justify-content-around text-center mt-1">
+            <div class="col-sm-8">
+                <table class="table table-hover mb-5">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Username</th>
+                            <th scope="col">Phone</th>
+                            <th scope="col">Total price</th>
+                            <th scope="col">Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for order in orders %}
+                        <tr>
+                            <td scope="row">{{forloop.counter}}</td>
+                            <td scope="row">{% if order.status == 'Delivered' %} <p style="color: #60F236;">Delivered</p> {% elif order.status == 'Out for shipping' %} <p style="color: #e1aa00;">Out for shipping</p> {% else %} <p style="color: #F00707;">Pending</p> {% endif %}</td>
+                            <td>{{order.user}}</td>
+                            {% if order.fname %}
+                            <td>{{order.phone}}</td>
+                            {% else %}
+                            <td>-</td>
+                            {% endif %}
+                            <td>{{order.totalPrice}} ₸</td>
+                            <td class="aline-inline">
+                                <form action="{% url 'delete_order' %}" method="POST">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="id" value="{{order.id}}">
+                                    <a href="{% url 'edit_order' order.id %}" class="btn btn-sm btn-info">Edit</a>
+                                    <button type="submit" value="Delete" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </section>
+
 </div>
 
 

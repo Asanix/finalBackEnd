@@ -142,7 +142,20 @@
                                 {% for o in order %}
                                 <div class="ml-2" style="display: flex">
                                     <h6 style="margin: 1rem">{{ o }}</h6>
-                                    <h6 style="margin: 1rem">{{ o.status }}</h6>
+                                    {% if o.status == 'Pending' %}
+                                    <h6 style="margin: 1rem; color: #F00707">
+                                        {{ o.status }}
+                                    </h6>
+                                    {% elif o.status == 'Out for shipping' %}
+                                    <h6 style="margin: 1rem; color: #e1aa00">
+                                        {{ o.status }}
+                                    </h6>
+                                    {% else %}
+                                    <h6 style="margin: 1rem; color: #60F236">
+                                        {{ o.status }}
+                                    </h6>
+                                    {% endif %}
+
                                     <h6 style="margin: 1rem">{{ o.totalPrice }} ₸</h6>
                                 </div>
                                 {% endfor %}

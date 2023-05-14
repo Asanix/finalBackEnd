@@ -7,7 +7,7 @@ from django.views import View
 from django.views.generic import ListView
 
 from .models import *
-from .forms import AddProductForm, AddUserForm, EditUserForm, AddProductFormUser
+from .forms import *
 
 import random
 
@@ -103,7 +103,8 @@ class admin_page(View):
     def get(self, request):
         users = User.objects.all()
         products = Product.objects.all()
-        context = {'products': products, 'users': users}
+        orders = Order.objects.all()
+        context = {'products': products, 'users': users, 'orders': orders}
         return render(request, '../template/main/admin-page.html', context)
 
 
@@ -196,6 +197,29 @@ class edit_user(View):
         if form.is_valid():
             form.save()
             return redirect('/acc/')
+
+
+class edit_order(View):
+    def get(self, request, id):
+        order = Order.objects.get(id=id)
+        form = EditOrderForm(instance=order)
+        return render(request, '../template/main/edit-order.html', {'form': form})
+
+    def post(self, request, id):
+        order = Order.objects.get(id=id)
+        form = EditOrderForm(request.POST, instance=order)
+        if form.is_valid():
+            form.save()
+            return redirect('/acc/')
+
+
+class delete_order(View):
+    def post(self, request):
+        data = request.POST
+        id = data.get('id')
+        order = Order.objects.get(id=id)
+        order.delete()
+        return redirect('/admin_page/')
 
 
 class Search(ListView):
